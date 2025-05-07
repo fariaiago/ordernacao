@@ -3,10 +3,10 @@ LIB = lib
 EXE = ordem
 
 $(EXE): $(LIB)/main.o $(LIB)/sort.o
-	$(CC) -o $@ $^
+	$(CC) -g -o $@ $^
 
 $(LIB)/%.o: %.c
-	$(CC) -c -o $@ $<
+	$(CC) -g -c -o $@ $<
 
 run:
 	./$(EXE)
