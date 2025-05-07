@@ -2,9 +2,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-void bubblesort(int *vetor, size_t vetor_len, size_t *n_comparacoes, size_t *n_trocas)
+Dados bubble_sort(int *vetor, size_t vetor_len)
 {
-	size_t n = vetor_len;
+	size_t n = vetor_len, n_comparacoes = 0, n_trocas = 0;
 	bool trocado = false;
 	do
 	{
@@ -17,11 +17,11 @@ void bubblesort(int *vetor, size_t vetor_len, size_t *n_comparacoes, size_t *n_t
 				vetor[i] = vetor[i - 1] ^ vetor[i];
 				vetor[i - 1] = vetor[i - 1] ^ vetor[i];
 				trocado = true;
-				(*n_trocas)++;
+				n_trocas++;
 			}
-			(*n_comparacoes)++;
+			n_comparacoes++;
 		}
 		n--;
 	} while (trocado);
-	
+	return (Dados){ .n_comparacoes = n_comparacoes, .n_trocas = n_trocas};
 }
