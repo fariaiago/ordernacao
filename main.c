@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#define TAMANHO 1
+#define TAMANHO 4
 
 typedef Dados (*SortFn)(int *, size_t);
 
@@ -13,18 +13,7 @@ void sort_todas_ordens(SortFn sort, char *sort_nome,
 	int **entradas_ordenada, int **entradas_inversa, int **entradas_aleatoria);
 void ordernar(SortFn sort, int **entradas, char *ordem_nome);
 
-// size_t vetores_tamanho[TAMANHO] = { 1000, 10000, 50000, 100000};
-size_t vetores_tamanho[TAMANHO] = { 8};
-
-static void print_vec(int *vetor, size_t len)
-{
-	printf("\t\t\tVetor[%ld]: { ", len);
-	for (size_t i = 0; i < len; i++)
-	{
-		printf("%d ", vetor[i]);
-	}
-	puts("}");
-}
+size_t vetores_tamanho[TAMANHO] = {1000, 10000, 50000, 100000};
 
 int main(void)
 {
@@ -81,12 +70,7 @@ void ordernar(SortFn sort, int **entradas, char *ordem_nome)
 		Dados dados = sort(vetor_copia, vetores_tamanho[i]);
 		printf("\t\tTamanho: %ld\n\t\t\tTempo gasto: %ld\n\t\t\tN° de comparações: %ld\n\t\t\tN° de trocas: %ld\n",
 			vetores_tamanho[i], clock() - inicio, dados.n_comparacoes, dados.n_trocas);
-		
-		printf("\t\tAntes:\n");
-		print_vec(entradas[i], vetores_tamanho[i]);
-		printf("\t\tDepois:\n");
-		print_vec(vetor_copia, vetores_tamanho[i]);
-		
+
 		free(vetor_copia);
 	}
 }

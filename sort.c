@@ -105,7 +105,7 @@ static void merge_sort_split(int *aux, size_t inicio, size_t fim, int *vetor, Da
 	dados->n_comparacoes++;
 
 	size_t meio = (fim + inicio) / 2;
-	merge_sort_split(vetor, 0, meio, aux, dados);
+	merge_sort_split(vetor, inicio, meio, aux, dados);
 	merge_sort_split(vetor, meio, fim, aux, dados);
 
 	merge_sort_merge(aux, inicio, meio, fim, vetor, dados);
@@ -131,15 +131,15 @@ static void _quicksort(int *vetor, long inicio, long fim, Dados *dados)
 		{
 			ini_pos++;
 		}
-		while (vetor[fim_pos - 1] > pivo)
+		while (vetor[fim_pos] > pivo)
 		{
 			fim_pos--;
 		}
 		if (ini_pos <= fim_pos)
 		{
 			int aux = vetor[ini_pos];
-			vetor[ini_pos] = vetor[fim_pos - 1];
-			vetor[fim_pos - 1] = vetor[ini_pos];
+			vetor[ini_pos] = vetor[fim_pos];
+			vetor[fim_pos] = aux;
 			ini_pos++;
 			fim_pos--;
 			dados->n_trocas++;
@@ -160,7 +160,7 @@ static void _quicksort(int *vetor, long inicio, long fim, Dados *dados)
 Dados quick_sort(int *vetor, size_t vetor_len)
 {
 	Dados dados = { .n_comparacoes = 0, .n_trocas = 0};
-	_quicksort(vetor, 0, vetor_len, &dados);
+	_quicksort(vetor, 0, vetor_len - 1, &dados);
 	return (Dados) { .n_comparacoes = dados.n_comparacoes, .n_trocas = dados.n_trocas};
 }
 
